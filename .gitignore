@@ -1,0 +1,21 @@
+﻿# LabVIEW user and machine-specific files
+*.aliases
+*.lvlps
+.*.UserState/
+*.lvprojstate
+
+# Python
+ModbusSimulator/.venv/
+__pycache__/
+*.pyc
+
+# Generated TDMS test output
+TestData/*.tdms
+TestData/*.tdms_index
+
+# Temporary / OS files
+Thumbs.db
+Desktop.ini
+*.tmp
+*.bak
+~*
