@@ -1,0 +1,24 @@
+# Python virtual environment
+ModbusSimulator/.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Test output data
+TestData/*.tdms
+TestData/*.tdms_index
+
+# LabVIEW generated / user-specific files
+*.aliases
+*.lvlps
+*.log
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Temporary files
+*.tmp
+*.bak
+~*
