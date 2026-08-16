@@ -1,13 +1,30 @@
 # Automated Electric Motor Test Bench
 
-A LabVIEW-based automated motor test bench built as a portfolio project to demonstrate test automation, NI-DAQmx acquisition, Modbus TCP communication, fault handling, safety monitoring, and TDMS logging.
+LabVIEW test-automation portfolio project demonstrating **automated test sequencing, NI-DAQmx acquisition, Modbus TCP communication, safety logic, fault injection, validation, and TDMS logging**.
 
-The application executes a multi-stage motor test sequence, acquires measurements from one of three interchangeable sources, evaluates acceptance and safety criteria, handles faults, and records test data and metadata for later review.
+The application runs a three-stage electric-motor test sequence, acquires measurements through interchangeable data sources, evaluates acceptance and safety criteria, reacts to system faults, and records measurements plus test metadata for later review.
+
+**Core technologies:** LabVIEW | NI-DAQmx | Modbus TCP | Python / PyModbus | TDMS | Git
+
+![Normal PASS](TestEvidence/01_HMI_Normal_PASS.png)
+
+## Project in 30 Seconds
+
+| Area | Implementation |
+|---|---|
+| Test executive | LabVIEW state machine with 1000, 2000, and 3000 RPM stages |
+| Measurement sources | Software simulator, simulated NI-DAQmx hardware, or Modbus TCP |
+| Industrial communication | Modbus TCP command/feedback exchange with communication-loss detection |
+| Safety | Independent safety trips, automatic FAULT transition, and zero RPM/load command |
+| Test evaluation | Configurable acceptance limits with latched test-failure result |
+| Fault testing | Overcurrent, overtemperature, high vibration, and RPM sensor failure injection |
+| Data logging | TDMS measurement channels plus final-result and configuration metadata |
+| Validation | Nine documented end-to-end and fault-handling scenarios in `VALIDATION.md` |
 
 ## Highlights
 
-- LabVIEW state-machine test executive
-- Automated 1000, 2000, and 3000 RPM test stages
+- Automated LabVIEW state-machine test sequence
+- 1000 RPM, 2000 RPM, and 3000 RPM operating points
 - Configurable load commands and acceptance limits
 - Three interchangeable measurement sources:
   - software motor simulator
@@ -23,10 +40,6 @@ The application executes a multi-stage motor test sequence, acquires measurement
 - Operator-oriented HMI
 
 ## Demo
-
-### Normal test completion
-
-![Normal PASS](TestEvidence/01_HMI_Normal_PASS.png)
 
 ### Test running
 
@@ -152,7 +165,7 @@ Port       : 5020
 Device ID  : 1
 ```
 
-### Register map
+### Register Map
 
 | Address | Signal |
 |---:|---|
@@ -167,11 +180,11 @@ Device ID  : 1
 
 Values with `x10` scaling are transported as integer Modbus registers and converted back to engineering values in LabVIEW.
 
-### Modbus implementation
+### Modbus Implementation
 
 ![Modbus communication](TestEvidence/05_Modbus_Communication.png)
 
-### Virtual controller
+### Virtual Controller
 
 The virtual controller is implemented in Python using PyModbus:
 
@@ -238,11 +251,11 @@ This allows safety behavior to be validated without physical motor hardware.
 
 The application also stores test configuration and final-result metadata as TDMS properties.
 
-### TDMS metadata example
+### TDMS Metadata Example
 
 ![TDMS metadata](TestEvidence/06_TDMS_Result_Metadata.png)
 
-### TDMS data example
+### TDMS Data Example
 
 ![TDMS data](TestEvidence/07_TDMS_Result_Data.png)
 
