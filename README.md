@@ -6,6 +6,8 @@ The application runs a three-stage electric-motor test sequence, acquires measur
 
 **Core technologies:** LabVIEW | NI-DAQmx | Modbus TCP | Python / PyModbus | TDMS | Git
 
+**Project documentation:** [Setup & Run Guide](SETUP.md) | [Technical Architecture](ARCHITECTURE.md) | [Validation Matrix](VALIDATION.md)
+
 ![Normal PASS](TestEvidence/01_HMI_Normal_PASS.png)
 
 ## Project in 30 Seconds
@@ -103,6 +105,8 @@ Each active test stage runs for approximately five seconds. A short settling per
 
 The application uses a common `MotorMeasurements.ctl` typedef so downstream logic does not need to know whether the data came from software simulation, DAQmx, or Modbus TCP.
 
+For the design rationale, state-machine behavior, safety hierarchy, timing logic, and subsystem boundaries, see [`ARCHITECTURE.md`](ARCHITECTURE.md).
+
 ### Main LabVIEW block diagram
 
 ![Main block diagram](TestEvidence/04_Main_Block_Diagram.png)
@@ -196,19 +200,7 @@ ModbusSimulator/
 
 The server accepts commanded RPM and load, calculates simplified motor measurements, and exposes them through the Modbus register map.
 
-Install the Python dependency with:
-
-```powershell
-cd ModbusSimulator
-python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
-```
-
-Run the virtual controller with:
-
-```powershell
-.\.venv\Scripts\python.exe modbus_motor_server.py
-```
+For complete environment setup and run instructions, see [`SETUP.md`](SETUP.md).
 
 ## Safety and Acceptance Logic
 
@@ -261,7 +253,7 @@ The application also stores test configuration and final-result metadata as TDMS
 
 ## Validation
 
-The repository contains a documented validation matrix in [`VALIDATION.md`](VALIDATION.md).
+The documented validation matrix is available in [`VALIDATION.md`](VALIDATION.md).
 
 Validated scenarios include:
 
@@ -303,6 +295,9 @@ TDMS_LogMeasurements.vi
 
 ModbusSimulator/
 TestEvidence/
+README.md
+SETUP.md
+ARCHITECTURE.md
 VALIDATION.md
 ```
 
